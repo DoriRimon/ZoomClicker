@@ -1,0 +1,19 @@
+{
+    "manifest_version": 2, 
+    "name": "FastBlocker", 
+    "description": "AdBlocker for 10fastfingers", 
+    "version": "1.0.0",
+    "icons": {"128": "images/flow.png"}, 
+    "browser_action": {
+        "default_title": "FastBlocker AdBlocker",
+        "default_icon": "images/flow.png", 
+        "default_popup": "popup.html"
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://10fastfingers.com/*"],
+            "js": ["remover.js"], 
+            "run_at": "document_start"
+        }
+    ]
+}

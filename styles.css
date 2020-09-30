@@ -1,0 +1,70 @@
+html,
+body {
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+    margin: 0;
+    min-height: 185px;
+    padding: 0;
+    width: 310px;
+}
+
+h1 {
+    font-family: "Menlo", monospace;
+    font-size: 22px;
+    font-weight: 400;
+    margin: 0;
+    color: #79ABC8;
+}
+
+a:link,
+a:visited {
+    color: #000000;
+    outline: 0;
+    text-decoration: none;
+}
+
+img {
+    width: 30px;
+}
+
+.header {
+    align-items: center;
+    text-align: center;
+    border-bottom: 0.5px solid #dadada;
+}
+
+.content {
+    padding: 0 22px;
+    align-items: center;
+}
+
+.logo {
+    padding: 16px;
+}
+
+.logo-icon {
+    vertical-align: bottom;
+    margin-right: 12px;
+}
+
+#main {
+    text-align: center;
+}
+
+.bottom {
+    align-items: center;
+    text-align: end;
+    margin-right: 30px;
+}
+
+#git {
+    transition: 0.3s;
+    opacity: 1;
+    width: 30px;
+}
+
+#git:hover { 
+    opacity: 0.6;
+    width: 33px;
+    margin-bottom: 15px;
+}
