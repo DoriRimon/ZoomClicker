@@ -14,5 +14,8 @@
             "matches": ["https://zoom.us/rec/play/*"],
             "js": ["keyControl.js"]
         }
+    ],
+    "web_accessible_resources": [
+        "images/speed_up.png"
     ]
 }
