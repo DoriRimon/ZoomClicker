@@ -61,7 +61,17 @@ document.addEventListener("keypress", event => {
 });
 
 function addIcon(imgSrc) {
-    addCss();
+    let flag = false;
+    for (style of document.getElementsByTagName("style")) {
+        if (style.id == "mystylesheet")
+            flag = true;
+    }
+    if (!flag)
+        addCss();
+    for (i of document.getElementsByTagName("img")) {
+        if (i.classList.contains("myicon"))
+            i.remove();
+    }
     let vidClass = document.getElementsByClassName(videoClass);
     if (vidClass.length == 0)
         return;
@@ -70,9 +80,9 @@ function addIcon(imgSrc) {
     img.alt = "Icon";
     img.src = imgSrc;
     vidDiv.appendChild(img);
-    img.classList.add('myicon');
+    img.classList.add("myicon");
     setTimeout(() => {
-        img.classList.add('transitionOn');
+        img.classList.add("transitionOn");
     }, 5);
 }
 
@@ -96,10 +106,11 @@ function addCss() {
     }
     `
 
-    let styleSheet = document.createElement("style")
-    styleSheet.type = "text/css"
-    styleSheet.innerText = styles
-    document.head.appendChild(styleSheet)
+    let styleSheet = document.createElement("style");
+    styleSheet.type = "text/css";
+    styleSheet.innerText = styles;
+    styleSheet.id = "mystylesheet";
+    document.head.appendChild(styleSheet);
 }
 
 
