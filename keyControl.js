@@ -18,7 +18,7 @@ document.addEventListener("keydown", event => {
                 videos[videos.length - 1].playbackRate += 0.25;
                 console.clear();
                 console.log("playbackRate = " + videos[videos.length - 1].playbackRate);
-                addIcon(speedUp);
+                injectIcon(speedUp);
             }
         }
         else if (presses["ArrowDown"]) {
@@ -26,18 +26,18 @@ document.addEventListener("keydown", event => {
                 videos[videos.length - 1].playbackRate -= 0.25;
                 console.clear();
                 console.log("playbackRate = " + videos[videos.length - 1].playbackRate);
-                addIcon(speedDown);
+                injectIcon(speedDown);
             }
         }
         else if (presses["ArrowRight"]) {
             if (videos[videos.length - 1].currentTime < videos[videos.length - 1].duration - 5)
                 videos[videos.length - 1].currentTime += 5;
-                addIcon(fastForward);
+                injectIcon(fastForward);
         }
         else if (presses["ArrowLeft"]) {
             if (videos[videos.length - 1].currentTime > 5)
                 videos[videos.length - 1].currentTime -= 5;
-                addIcon(fastBackward);
+                injectIcon(fastBackward);
         }
     }
 });
@@ -60,14 +60,14 @@ document.addEventListener("keypress", event => {
     }
 });
 
-function addIcon(imgSrc) {
+function injectIcon(imgSrc) {
     let flag = false;
-    for (style of document.getElementsByTagName("style")) {
-        if (style.id == "mystylesheet")
+    for (s of document.getElementsByTagName("style")) {
+        if (s.id == "mystylesheet")
             flag = true;
     }
     if (!flag)
-        addCss();
+        injectCss();
     for (i of document.getElementsByTagName("img")) {
         if (i.classList.contains("myicon"))
             i.remove();
@@ -86,7 +86,7 @@ function addIcon(imgSrc) {
     }, 5);
 }
 
-function addCss() {
+function injectCss() {
     let width = videos[videos.length - 1].videoWidth;
     let height = videos[videos.length - 1].videoHeight;
     let styles = `

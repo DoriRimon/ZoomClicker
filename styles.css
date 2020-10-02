@@ -2,10 +2,10 @@ html,
 body {
     font-family: "Open Sans", sans-serif;
     font-size: 14px;
-    margin: 0;
-    min-height: 185px;
+    margin-top: 0;
     padding: 0;
     width: 310px;
+    margin-bottom: 15px;
 }
 
 h1 {
@@ -36,6 +36,7 @@ img {
 .content {
     padding: 0 22px;
     align-items: center;
+    text-align: center;
 }
 
 .logo {
@@ -47,8 +48,13 @@ img {
     margin-right: 12px;
 }
 
-#main {
+#description {
+    list-style-type: circle;
     text-align: center;
+}
+
+#description li {
+    margin: 4px;
 }
 
 .bottom {
