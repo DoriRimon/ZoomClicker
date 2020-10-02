@@ -16,6 +16,6 @@
         }
     ],
     "web_accessible_resources": [
-        "images/speed_up.png"
+        "images/*.png"
     ]
 }

@@ -4,7 +4,10 @@ var buttons = document.getElementsByTagName("button");
 const buttonClass = "vjs-play-control vjs-control vjs-button";
 const videoClass = "player-panel-l";
 const iconSize = 70;
-const speedUp = chrome.runtime.getURL("images/speed_up.png")
+const speedUp = chrome.runtime.getURL("images/speed_up.png");
+const speedDown = chrome.runtime.getURL("images/speed_down.png");
+const fastForward = chrome.runtime.getURL("images/fast_forward.png");
+const fastBackward = chrome.runtime.getURL("images/fast_backward.png");
 
 document.addEventListener("keydown", event => {
     presses[event.key] = (event.type == "keydown");
@@ -23,15 +26,18 @@ document.addEventListener("keydown", event => {
                 videos[videos.length - 1].playbackRate -= 0.25;
                 console.clear();
                 console.log("playbackRate = " + videos[videos.length - 1].playbackRate);
+                addIcon(speedDown);
             }
         }
         else if (presses["ArrowRight"]) {
             if (videos[videos.length - 1].currentTime < videos[videos.length - 1].duration - 5)
                 videos[videos.length - 1].currentTime += 5;
+                addIcon(fastForward);
         }
         else if (presses["ArrowLeft"]) {
             if (videos[videos.length - 1].currentTime > 5)
                 videos[videos.length - 1].currentTime -= 5;
+                addIcon(fastBackward);
         }
     }
 });
@@ -64,30 +70,29 @@ function addIcon(imgSrc) {
     img.alt = "Icon";
     img.src = imgSrc;
     vidDiv.appendChild(img);
-    img.classList.add('icon');
+    img.classList.add('myicon');
     setTimeout(() => {
         img.classList.add('transitionOn');
-    }, 20);
+    }, 5);
 }
 
 function addCss() {
-    let width = videos[videos.length - 1]
+    let width = videos[videos.length - 1].videoWidth;
+    let height = videos[videos.length - 1].videoHeight;
     let styles = `
-    .icon {
+    .myicon {
         width: ${iconSize}px;
         height: ${iconSize}px;
         position: absolute;
-        margin-top: 155px;
+        margin-top: ${(height / 2) + (iconSize / 2)}px;
         opacity: 1;
-        -webkit-transition: 0.6s ease-in-out;
-        -moz-transition: 0.6s ease-in-out;
-        -o-transition: 0.6s ease-in-out;
         transition: 0.6s ease-in-out;
     }
-    .icon.transitionOn {
+    .myicon.transitionOn {
         opacity: 0;
         width: ${iconSize * 1.5}px;
         height: ${iconSize * 1.5}px;
+        margin-top: ${(height / 2) + (iconSize / 2) - (0.25 * iconSize)}px;
     }
     `
 
