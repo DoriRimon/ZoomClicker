@@ -64,10 +64,9 @@ function injectIcon(imgSrc) {
     let flag = false;
     for (s of document.getElementsByTagName("style")) {
         if (s.id == "mystylesheet")
-            flag = true;
+            s.remove();
     }
-    if (!flag)
-        injectCss();
+    injectCss();
     for (i of document.getElementsByTagName("img")) {
         if (i.classList.contains("myicon"))
             i.remove();
@@ -87,14 +86,13 @@ function injectIcon(imgSrc) {
 }
 
 function injectCss() {
-    let width = videos[videos.length - 1].videoWidth;
-    let height = videos[videos.length - 1].videoHeight;
+    let height = document.getElementsByClassName("player-share")[0].offsetHeight;
     let styles = `
     .myicon {
         width: ${iconSize}px;
         height: ${iconSize}px;
         position: absolute;
-        margin-top: ${(height / 2) + (iconSize / 2)}px;
+        margin-top: ${(height / 2) - (iconSize / 2)}px;
         opacity: 1;
         transition: 0.6s ease-in-out;
     }
@@ -102,7 +100,7 @@ function injectCss() {
         opacity: 0;
         width: ${iconSize * 1.5}px;
         height: ${iconSize * 1.5}px;
-        margin-top: ${(height / 2) + (iconSize / 2) - (0.25 * iconSize)}px;
+        margin-top: ${(height / 2) - (iconSize / 2) - (0.25 * iconSize)}px;
     }
     `
 
