@@ -48,9 +48,11 @@ document.addEventListener("keyup", event => {
 
 document.addEventListener("keypress", event => {
     if (event.key == " ") {
+        console.log('space')
         let playButton = null;
         for (button of buttons) {
             if (button.className.indexOf(buttonClass) != -1) {
+                console.log('in')
                 playButton = button;
                 break;
             }
@@ -110,5 +112,3 @@ function injectCss() {
     styleSheet.id = "mystylesheet";
     document.head.appendChild(styleSheet);
 }
-
-

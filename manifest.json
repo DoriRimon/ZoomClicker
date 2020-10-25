@@ -11,7 +11,7 @@
     },
     "content_scripts": [
         {
-            "matches": ["https://zoom.us/rec/play/*"],
+            "matches": ["https://zoom.us/rec/play/*", "https://us02web.zoom.us/rec/play/*"],
             "js": ["keyControl.js"]
         }
     ],
