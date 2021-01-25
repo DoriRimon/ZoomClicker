@@ -2,7 +2,9 @@ var presses = {};
 var videos = document.getElementsByTagName("video");
 var buttons = document.getElementsByTagName("button");
 const buttonClass = "vjs-play-control vjs-control vjs-button";
-const videoClass = "player-panel-l";
+var videoClass = "player-panel-r";
+if (videos.length > 1)
+    videoClass = "player-panel-l";
 const iconSize = 70;
 const speedUp = chrome.runtime.getURL("images/speed_up.png");
 const speedDown = chrome.runtime.getURL("images/speed_down.png");
@@ -48,11 +50,9 @@ document.addEventListener("keyup", event => {
 
 document.addEventListener("keypress", event => {
     if (event.key == " ") {
-        console.log('space')
         let playButton = null;
         for (button of buttons) {
             if (button.className.indexOf(buttonClass) != -1) {
-                console.log('in')
                 playButton = button;
                 break;
             }
@@ -84,27 +84,38 @@ function injectIcon(imgSrc) {
     img.classList.add("myicon");
     setTimeout(() => {
         img.classList.add("transitionOn");
-    }, 5);
+    }, 1);
 }
 
 function injectCss() {
-    let height = document.getElementsByClassName("player-share")[0].offsetHeight;
+    let envClass = "player-view";
+    if (videos.length > 1)
+        envClass = "player-share";
+    let height = document.getElementsByClassName(envClass)[0].offsetHeight;
+    let width = document.getElementsByClassName(envClass)[0].offsetWidth;
     let styles = `
     .myicon {
         width: ${iconSize}px;
         height: ${iconSize}px;
         position: absolute;
         margin-top: ${(height / 2) - (iconSize / 2)}px;
+        margin-left: ${(width / 2) - (iconSize / 2)}px;
         opacity: 1;
-        transition: 0.6s ease-in-out;
+        transition: 0.5s ease-out;
     }
     .myicon.transitionOn {
         opacity: 0;
         width: ${iconSize * 1.5}px;
         height: ${iconSize * 1.5}px;
         margin-top: ${(height / 2) - (iconSize / 2) - (0.25 * iconSize)}px;
+        margin-left: ${(width / 2) - (iconSize / 2) - (0.25 * iconSize)}px;
     }
     `
+
+    if (videos.length > 1) {
+        styles = styles.replace(`margin-left: ${(width / 2) - (iconSize / 2)}px;`, ``);
+        styles = styles.replace(`margin-left: ${(width / 2) - (iconSize / 2) - (0.25 * iconSize)}px;`, ``);
+    }
 
     let styleSheet = document.createElement("style");
     styleSheet.type = "text/css";
